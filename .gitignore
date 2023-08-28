@@ -1,0 +1,8 @@
+target
+.bloop
+.bsp
+.idea
+.vscode
+.scala-build
+.metals
+scripts/lib
