@@ -1,0 +1,19 @@
+{
+    "type": "record",
+    "namespace": "com.github.novakovalexey",
+    "name": "WordCountState",
+    "fields": [
+        {
+            "name": "key",
+            "type": "int"
+        },
+        {
+            "name": "count",
+            "type": "int"
+        },
+        {
+            "name": "changed",
+            "type": "long"            
+        }
+    ]
+}
