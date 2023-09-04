@@ -3,7 +3,8 @@ package com.github.novakovalexey
 import org.apache.flink.api.common.state.{MapState, MapStateDescriptor}
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.api.java.ExecutionEnvironment
-import org.apache.flink.streaming.api.scala._
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
+//import org.apache.flink.streaming.api.scala._
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction
 import org.apache.flink.streaming.api.functions.source.FromIteratorFunction
 import org.apache.flink.configuration.Configuration
@@ -18,11 +19,9 @@ import org.apache.flink.api.java.functions.KeySelector
 import scala.util.Random
 import scala.collection.JavaConverters._
 
-case class Event(number: Int, count: Int = 1)
-
 object FakeSource {
   val iterator = new FromIteratorFunction[Event](
-    (new Iterator[Event] with Serializable {
+    new Iterator[Event] with Serializable {
       val rand = new Random()
 
       override def hasNext: Boolean = true
@@ -31,7 +30,7 @@ object FakeSource {
         Thread.sleep(1000)
         Event(rand.nextInt(20))
       }
-    }).asJava
+    }.asJava
   )
 }
 
@@ -75,9 +74,8 @@ object Main extends App {
   val env = StreamExecutionEnvironment.getExecutionEnvironment
   env
     .addSource(FakeSource.iterator)
-    .keyBy(new KeySelector[Event, Int] {
-      override def getKey(value: Event): Int = value.number
-    })
+    .returns(TypeInformation.of(classOf[Event]))
+    .keyBy(_.number, TypeInformation.of(classOf[Int]))
     .process(new WordCounter())
     .uid("word-count")
     .print()

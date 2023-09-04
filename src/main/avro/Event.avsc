@@ -1,0 +1,16 @@
+{
+    "type": "record",
+    "namespace": "com.github.novakovalexey",
+    "name": "Event",
+    "fields": [
+        {
+            "name": "number",
+            "type": "int"
+        },
+        {
+            "name": "count",
+            "type": "int",
+            "default": 1
+        }
+    ]
+}
