@@ -3,14 +3,14 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 ThisBuild / organization := "com.github.novakov-alexey"
 ThisBuild / scalaVersion := "2.12.7"
 
- lazy val flinkVersion = "1.15.2"
-//lazy val flinkVersion = "1.14.6"
+lazy val flinkVersion = "1.15.2"
+// lazy val flinkVersion = "1.14.6"
 
 lazy val root = (project in file(".")).settings(
   name := "scala-212-savepoint",
   libraryDependencies ++= Seq(
     "org.apache.flink" % "flink-streaming-java" % flinkVersion % Provided,
-    //"org.apache.flink" %% "flink-streaming-scala" % flinkVersion % Provided,
+    "org.apache.flink" %% "flink-streaming-scala" % flinkVersion % Provided,
     "org.apache.flink" % "flink-state-processor-api" % flinkVersion % Provided,
     "org.apache.flink" % "flink-clients" % flinkVersion % Provided,
     "org.apache.flink" % "flink-avro" % flinkVersion,

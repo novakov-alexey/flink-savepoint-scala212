@@ -13,7 +13,15 @@
         },
         {
             "name": "changed",
-            "type": "long"            
+            "type": "long"
+        },
+        {
+            "name": "lastCount",
+            "type": [
+                "null",
+                "int"
+            ],
+            "default": null
         }
     ]
 }
